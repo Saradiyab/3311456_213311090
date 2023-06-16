@@ -1,5 +1,14 @@
+
+import 'package:appfood/widgets/allwidget.dart';
+import 'package:appfood/widgets/appbarwidget.dart';
+import 'package:appfood/widgets/desertwidget.dart';
+import 'package:appfood/widgets/drawerwidget.dart';
 import 'package:appfood/widgets/home_bottom_bar.dart';
-import 'package:appfood/widgets/items_widget.dart';
+import 'package:appfood/widgets/burgerwidget.dart';
+import 'package:appfood/widgets/icecreamwidget.dart';
+import 'package:appfood/widgets/pastawidget.dart';
+import 'package:appfood/widgets/pizzawidget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,11 +21,13 @@ class HomePage extends StatefulWidget {
 }
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+      
+      final user = FirebaseAuth.instance.currentUser!;
   late TabController _tabController;
 
   @override
   void initState() {
-    _tabController = TabController(length: 5, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 6, vsync: this, initialIndex: 0);
     _tabController.addListener(_handleTabSelection);
     super.initState();
   }
@@ -36,39 +47,10 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 45, 104, 153),
-      bottomNavigationBar:BottomNavigationBar(items: const[
-        BottomNavigationBarItem(icon: Icon(Icons.home),
-        label: "home"),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite),
-        label: "favorite"),
-
-      ]),
       body: SafeArea(
-        child: Padding(padding: EdgeInsets.only(top: 15),
         child: ListView(
           children: [
-            Padding(padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: (){},
-                  child: Icon(Icons.sort_rounded, color:
-                 Colors.white.withOpacity(0.5),
-                   size: 35,
-                  ),
-                ),
-                 InkWell(
-                  onTap: (){},
-                  child: Icon(Icons.notifications,
-                  color:Colors.white.withOpacity(0.5),
-                   size: 35,
-                   ),
-                ),
-              ],
-            ),
-            ),
-            SizedBox(height: 30),
+            AppBarWidget(),
             Padding(
              padding: EdgeInsets.symmetric(horizontal: 15),
            child: Text("Are You Hungry", 
@@ -85,7 +67,7 @@ class _HomePageState extends State<HomePage>
             height: 60,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 50, 54, 56),
+              color:Color.fromARGB(255, 50, 54, 56),
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextFormField(
@@ -117,29 +99,32 @@ class _HomePageState extends State<HomePage>
         labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         labelPadding: EdgeInsets.symmetric(horizontal: 20),
         tabs: [
+        Tab(text: "All"),
         Tab(text: "Burger"),
-         Tab(text: "Pizaa"),
-          Tab(text: "Desert"),
-           Tab(text: "Ice Cream"),
-           Tab(text: "Pasta"),
+        Tab(text: "Pizaa"),
+        Tab(text: "Desert"),
+        Tab(text: "Ice Cream"),
+        Tab(text: "Pasta"),
+            
        ],
        ),
        SizedBox(height: 10),
+       
        Center(
         child:[
-         ItemsWidget(),
-          ItemsWidget(),
-           ItemsWidget(),
-            ItemsWidget(),
-             ItemsWidget(),
-
+        AllWidget(),
+        BurgerWidget(),
+        pizzawidget(),
+        DesertWidget(),
+       IcecreamWidget(),
+       PastaWidget(),
         ][_tabController.index] ,
        ),
       ],
      ),
     ),
-   ),
-   
+   bottomNavigationBar: HomeBottomBar(),
+   drawer: DrawerWidget(),
   );
  } 
 }

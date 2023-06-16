@@ -1,10 +1,88 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeBottomBar extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      height: 70,
+      decoration: BoxDecoration(
+        color:  Color(0XFF212325),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, "homepage");
+            },
+            child:Icon(
+              Icons.home,
+              color: Colors.white,
+              size: 35,
+              ) ,
+          ),
+
+          InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, "orders");
+            },
+            child:Icon(
+                CupertinoIcons.cart_fill,
+               color: Colors.white,
+              size: 35,
+              ) ,
+          ),
+
+          InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, "notifications");
+            },
+            child:Icon(
+              Icons.notifications,
+              color: Colors.white,
+              size: 35,
+              ) ,
+          ),
+
+          InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, "myaccount");
+            },
+            child:Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 35,
+              ) ,
+          ),
+          
+        ],),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+
+
+    /*  padding: EdgeInsets.symmetric(horizontal: 15),
       height: 80,
       decoration: BoxDecoration(
         color: Color(0XFF212325),
@@ -21,10 +99,10 @@ class HomeBottomBar extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Icon(Icons.home,
-           color: Color(0xFFE57734),
+          color: Color(0xFFE57734),
            size: 35,
           ),
-          Icon(Icons.favorite_outline,
+      Icon(Icons.favorite_outline,
            color: Colors.white,
            size: 35,
           ),
@@ -37,7 +115,7 @@ class HomeBottomBar extends StatelessWidget{
            size: 35,
           ),
         ],
-      ),
+      );
     );
   }
-}
+}*/

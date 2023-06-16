@@ -2,15 +2,18 @@ import 'package:appfood/screens/single_item_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ItemsWidget extends StatelessWidget{
+ class AllWidget extends StatelessWidget{
   List img = [
-    'Burger',
-    'Cake',
-    'Pizza',
-    'Desert',
-    'Donut',
-    'Pasta',
-    'Ice Cream',
+  'Chicken Burger',
+  'Meat Burger',
+  'Cake',
+  'Pizza',
+  'Desert',
+  'Donut',
+  'Tomatoes Pasta',
+  'Chicken Pasta',
+  'Ice Cream',
+  'Strawberry Ice Cream',
   ];
   @override
   Widget build(BuildContext context){
@@ -50,7 +53,7 @@ class ItemsWidget extends StatelessWidget{
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 9),
+              padding: EdgeInsets.only(bottom: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

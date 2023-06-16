@@ -1,3 +1,5 @@
+import 'package:appfood/home/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -8,73 +10,88 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final auth = FirebaseAuth.instance;
+  late String email;
+   late String password;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 45, 104, 153),
-      body:Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child:
-           Image.asset("images/OP.jpg",
-           height: 200,),
-           ),
-           Container(
-            padding: EdgeInsets.all(20),
-             child: Form(child: Column(
-              children: [
-           
-                TextFormField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person),
-                    hintText: "Username",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1)
-                    ),
-           
+      body: SingleChildScrollView(
+        child: Padding(padding: EdgeInsets.symmetric(horizontal: 20,
+        vertical: 60),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset("images/OP.jpg", height: 200,width: 250,),
+              SizedBox(height:30),
+              TextFormField(
+               onChanged: (value){email = value;},
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  labelText: "Email",
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.email),
+                ),
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+               onChanged: (value) {password = value;},
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.lock),
+                 
+                ),
+              ),
+              SizedBox(height: 30),
+              InkWell(
+                onTap: ()async{ var user = await auth.signInWithEmailAndPassword
+                (email: email, password: password);
+                if(user != null){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),),);
+                }
+                },
+                
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 225, 164, 73),
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                ) , 
-                SizedBox(height: 20) ,
-
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person),
-                    hintText: "Password",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1))),
-                ), 
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child:Row(
-                    children:[
-                  Text("I do not have an account!"),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed('singup');
-                    },
-                    child: Text("Click Here" , 
-                  style:TextStyle(color: Colors.black),
-                  ),)
-
-                ]),),
-
-                Container(
-                  child:ElevatedButton(
-                    style:ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 225, 164, 73)),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('homepage');
-                    }, 
-                    child:Text("Sign In" , 
-                    style: TextStyle(fontSize: 20),),
-              ) ),
-              ],
-             )),
-           )
-
-        ],
-      )
+                  child: Center(child: Text("Sign In", style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),),),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("I do not have an account!", style: TextStyle(fontSize: 17,
+                  ),
+                  ),
+                  TextButton(onPressed: ()
+                  {  Navigator.of(context).pushNamed('singup');},
+                   child:Text("Sign Up",style: TextStyle(
+                    color:  Color.fromARGB(255, 225, 164, 73),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),))
+                
+              ],)
+            ],
+          ),
+          ),
+        ),
+      ),
     );
   }
 }
