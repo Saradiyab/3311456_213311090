@@ -1,4 +1,3 @@
-
 import 'package:appfood/home/homepage.dart';
 import 'package:appfood/screens/logoutscreen.dart';
 import 'package:appfood/screens/myaccount.dart';
@@ -13,40 +12,44 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+
+import 'firebase_options.dart';
+
+const bool kIsWeb = bool.fromEnvironment('dart.library.js_util');
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  var p1 = await getApplicationDocumentsDirectory();
-  Hive.init(p1.path);
-  var myHive = Hive.openBox('test');
-  
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (kIsWeb) {
+    Hive.init('/assets/db');
+  } else {
+    var p1 = await getApplicationDocumentsDirectory();
+    Hive.init(p1.path);
+  }
+
+  Hive.openBox('test');
   runApp(const MyApp());
- }
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp ({super.key });
-  
+  const MyApp({super.key});
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Login(),
       routes: {
         "login": (context) => Login(),
-        "singup":(context) => SingUp(),
-        "homepage":(context) => HomePage(),
-        "notifications":(context) => Notifications(),
-        "orders":(context) =>Orders(),
-        "logoutscreen":(context) =>  LogoutScreen(),
-        "currentWeather":(context) => CurrentWeather(),
-        "myaccount":(context) =>  MyAccount(),
-        "settingsscreen":(context) => SettingsScreen(),
-      
-       
+        "singup": (context) => SingUp(),
+        "homepage": (context) => HomePage(),
+        "notifications": (context) => Notifications(),
+        "orders": (context) => Orders(),
+        "logoutscreen": (context) => LogoutScreen(),
+        "currentWeather": (context) => CurrentWeather(),
+        "myaccount": (context) => MyAccount(),
+        "settingsscreen": (context) => SettingsScreen(),
       },
-
-     
     );
   }
-
 }

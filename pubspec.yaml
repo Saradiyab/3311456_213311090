@@ -39,7 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   rename: ^2.1.1
   http: ^0.13.6 
-  firebase_core: ^2.13.0
+  firebase_core: ^2.14.0
   firebase_auth: ^4.6.1
   cloud_firestore: ^4.7.1
   firebase_storage: ^11.2.2
@@ -65,8 +65,8 @@ flutter_icons:
   web:
     generate: true
     image_path: "path/to/image.png"
-    background_color: "#hexcode"
-    theme_color: "#hexcode"
+    background_color: "#ccc"
+    theme_color: "#ccc"
   windows:
     generate: true
     image_path: "path/to/image.png"
