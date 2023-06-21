@@ -228,56 +228,17 @@ StreamBuilder<QuerySnapshot>(
                           content: Text(
                             'Are you sure you want to delete the user?',
                           ),
+                          
                           actions: [
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Color.fromARGB(255, 225, 164, 73),
-                                ),
-                              ),
-                              onPressed: () {
-                                _deleteUser(documentId);
-                                Navigator.pop(context);
-                              },
-                              child: Text('Delete'),
-                            ),
-                            TextButton(
-                              onPressed:(){
-                                   Navigator.pop(context);
-                                   },
-                                     child: Text('Cancel',
-                                     style:
-                                    TextStyle(color: Colors.white),
-                                             ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.delete),
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        backgroundColor: Color.fromARGB(255, 45, 104, 153),
-                                        title: Text('Delete User'),
-                                        content: Text(
-                                          'Are you sure you want to delete the user?',
+                             ElevatedButton(
+                             style: ButtonStyle(
+                               backgroundColor:  MaterialStateProperty.all(
+                               Color.fromARGB(255, 225, 164, 73),
+                                      ),
                                         ),
-                                        actions: [
-                                          ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:  MaterialStateProperty.all(
-                                        Color.fromARGB(255, 225, 164, 73),
-                                          ),
-                                            ),
-                                            onPressed: () {
-                                              _deleteUser(documentId);
-                                              Navigator.pop(context);
+                                        onPressed: () {
+                                           _deleteUser(documentId);
+                                             Navigator.pop(context);
                                             },
                                             child: Text('Delete'),
                                           ),

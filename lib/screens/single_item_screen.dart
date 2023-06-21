@@ -112,7 +112,7 @@ class _SingleItemScreenState extends State<SingleItemScreen> {
                                     border: Border.all(color: Colors.white),
                                   ),
                                   child: Text(
-                                    "0",
+                                    "1",
                                     style: TextStyle(
                                       fontSize: 20,
                                       height: 1.1,
